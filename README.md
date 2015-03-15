@@ -10,14 +10,16 @@
 
 [Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 
+The following is an example using this to wrap jsx template files.
+
 Example react template file ```template.jsx```:
 ```jsx
 <div class="testclass"></div>
 ```
 
-Use the loader...
+Use the loader after the jsx loader (or babel or something else), and specify ```react``` at ```React```:
 ```javascript
-var template = require("function-wrap-loader?React=react!./template.jsx");
+var template = require("jsx!function-wrap-loader?React=react!./template.jsx");
 ```
 
 Turns ```template.jsx``` in to:

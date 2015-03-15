@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/virajsanghvi/function-wrap-loader",
   "dependencies": {
-    "loader-utils": "0.2.x",
+    "loader-utils": "0.2.x"
   }
 }
