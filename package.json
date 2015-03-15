@@ -1,0 +1,30 @@
+{
+  "name": "function-wrap-loader",
+  "version": "0.1.0",
+  "description": "Wraps content in a function and brings in dependencies",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/virajsanghvi/function-wrap-loader.git"
+  },
+  "keywords": [
+    "template",
+    "function",
+    "wrap",
+    "react",
+    "jsx",
+    "_",
+    "webpack",
+    "loader",
+    "template"
+  ],
+  "author": "Viraj Sanghvi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/virajsanghvi/function-wrap-loader/issues"
+  },
+  "homepage": "https://github.com/virajsanghvi/function-wrap-loader",
+  "dependencies": {
+    "loader-utils": "0.2.x",
+  }
+}
