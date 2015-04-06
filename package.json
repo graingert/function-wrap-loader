@@ -1,6 +1,6 @@
 {
   "name": "function-wrap-loader",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Wraps content in a function and brings in dependencies",
   "main": "index.js",
   "repository": {

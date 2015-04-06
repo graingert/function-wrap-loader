@@ -19,7 +19,7 @@ Example react template file ```template.jsx```:
 
 Use the loader after the jsx loader (or babel or something else), and specify ```react``` at ```React```:
 ```javascript
-var template = require("jsx!function-wrap-loader?React=react!./template.jsx");
+var template = require("function-wrap-loader?React=react!jsx!./template.jsx");
 ```
 
 Turns ```template.jsx``` in to:
@@ -28,9 +28,33 @@ var React = __webpack_require__(10);
 module.exports = function () { return React.createElement("div", {class: "testclass"}) };
 ```
 
+### hoistRequires
+
+Pass ```hoistRequires=true``` to hoist any requires/import statements outside the function wrap. This assumes requires/imports are at the top of the file and uses regexes to identify them. This will be replaced by inspection of the AST in the future. This is useful for requiring components in templates:
+ 
+Example react template file ```template.jsx```:
+```jsx
+import _ from 'lodash';
+var __ = require('underscore');
+
+<div class="testclass"></div>
+```
+
+Use the loader after the jsx loader (or babel or something else), and specify ```react``` at ```React```, as well as ```hoistRequires=true```:
+```javascript
+var template = require("function-wrap-loader?React=react&hoistRequires=true!jsx!./template.jsx");
+```
+
+Turns ```template.jsx``` in to:
+```javascript
+var React = __webpack_require__(10);
+var _ = __webpack_require__(12);
+var __ = __webpack_require__(13);
+
+module.exports = function () { return React.createElement("div", {class: "testclass"}) };
+```                                                                                                                                 
+
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
-
-
 
