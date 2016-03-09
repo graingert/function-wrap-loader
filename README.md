@@ -53,7 +53,30 @@ var __ = __webpack_require__(13);
 
 module.exports = function () { return React.createElement("div", {class: "testclass"}) };
 ```                                                                                                                                 
+ 
+### allowLocals
 
+Pass ```allowLocals=true``` to enable local variables before the return statement in a function body. This assumes the return statement starts with a ```<```, ```(```, ```{```, or ```[```. This will be replaced by inspection of the AST in the future. This is useful for enabling local variables in templates.
+ 
+Example react template file ```template.jsx```:
+```jsx
+import _ from 'lodash';
+var a = 1;
+<div class="testclass"></div>
+```
+
+Use the loader after the jsx loader (or babel or something else), and specify ```react``` at ```React```, as well as ```hoistRequires=true```:
+```javascript
+var template = require("function-wrap-loader?React=react&hoistRequires=true&useLocals=true!jsx!./template.jsx");
+```
+
+Turns ```template.jsx``` in to:
+```javascript
+var React = __webpack_require__(10);
+var _ = __webpack_require__(12);
+module.exports = function () { var a = 1; return React.createElement("div", {class: "testclass"}); };
+```                                                                                                                                 
+ 
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
