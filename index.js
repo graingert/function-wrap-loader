@@ -2,7 +2,7 @@ var loaderUtils = require("loader-utils");
 
 // query options to ignore from requites
 var IGNORE_FROM_REQUIRES = {
-  hoistRequires: true
+  hoistRequires: true // for backwards compatibility
 };
 
 module.exports = function (originalSource) {
@@ -19,22 +19,17 @@ module.exports = function (originalSource) {
   // hoist requires if requested
   // TODO: use esprima instead of regexes to determine requires
   var source = originalSource;
-  var hoistRequires = query.hoistRequires;
-  if (hoistRequires !== false || hoistRequires !== 'false') {
-    // determine when requires stop
-    var lines = source.split(/\r\n?|\n/);
-    for (var i = 0, l = lines.length; i < l; ++i) {
-      var line = lines[i];
-      if (line.trim().length &&  
-          !line.match(/^(\s*import\s+.+\s+from\s+|.*require\()/)) {
-        break;
-      }
+  var lines = source.split(/\r\n?|\n/);
+  for (var i = 0, l = lines.length; i < l; ++i) {
+    var line = lines[i];
+    if (line.trim().length && line[0].match(/[<({\[]/)) {
+      break;
     }
-
-    // update requires and source
-    requires.push.apply(requires, lines.slice(0,i));
-    source = lines.slice(i).join("\n");
   }
+
+  // update requires and source
+  requires.push.apply(requires, lines.slice(0,i));
+  source = lines.slice(i).join("\n");
 
   // return output 
   return requires.join("\n") + 

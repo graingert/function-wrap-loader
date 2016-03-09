@@ -30,7 +30,7 @@ module.exports = function () { return React.createElement("div", {class: "testcl
 
 ### hoistRequires
 
-Pass ```hoistRequires=true``` to hoist any requires/import statements outside the function wrap. This assumes requires/imports are at the top of the file and uses regexes to identify them. This will be replaced by inspection of the AST in the future. This is useful for requiring components in templates:
+This option is deprecated. Every before the first line that starts with a ```<```, ```(```, ```{```, or ```[``` will be hoisted outside of the function wrap.
  
 Example react template file ```template.jsx```:
 ```jsx
